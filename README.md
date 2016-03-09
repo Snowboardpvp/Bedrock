@@ -24,6 +24,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/home (name)` - Teleport to a home.
 - `/homes` - List your homes.
 - `/fly (player)` - Toggle fly for yourself or others.
+- `/kick (player) [reason]` - Kick a player.
 - `/list` - List all online players.
 - `/(m|message) (player) (message)` - Direct message another player.
 - `/(perf|performance|gc)` - View performance stats.
@@ -65,6 +66,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `bedrock.home` - Use homes. Limits are define in permissions options.
 - `bedrock.fly.use` - Toggle fly for yourself.
 - `bedrock.fly.others` - Toggle fly for others.
+- `bedrock.kick` - Kick players.
 - `bedrock.message` - Direct message players.
 - `bedrock.performance` - View performance stats.
 - `bedrock.reload` - Reload configuration files.
