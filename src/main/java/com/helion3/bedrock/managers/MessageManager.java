@@ -68,11 +68,20 @@ public class MessageManager {
         recipient.sendMessage(Text.of(TextStyles.ITALIC, TextColors.GRAY, sender.getName(), ": ", message));
 
         // Send to watchers
-        MutableMessageChannel channel = MessageChannel.permission("bedrock.socialspy").asMutable();
+        MutableMessageChannel channel = MessageChannel.permission("bedrock.spy").asMutable();
 
         // Determine members who may/are not spying
         ArrayList<MessageReceiver> toRemove = new ArrayList<>();
-        channel.getMembers().stream().filter(receiver -> receiver instanceof Player && !Bedrock.getMessageManager().playerIsSpying((Player) receiver)).forEach(toRemove::add);
+        for (MessageReceiver receiver : channel.getMembers()) {
+            if (receiver instanceof Player) {
+                Player player = (Player) receiver;
+
+                if (receiver.equals(sender) || receiver.equals(recipient) ||
+                        !Bedrock.getMessageManager().playerIsSpying((Player) receiver)) {
+                    toRemove.add(receiver);
+                }
+            }
+        }
 
         // Remove invalid recipients
         toRemove.forEach(channel::removeMember);
