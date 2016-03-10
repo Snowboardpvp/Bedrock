@@ -94,6 +94,7 @@ public class Bedrock {
         game.getCommandManager().register(this, HealCommand.getCommand(), "heal");
         game.getCommandManager().register(this, HomeCommand.getCommand(), "home");
         game.getCommandManager().register(this, HomesCommand.getCommand(), "homes");
+        game.getCommandManager().register(this, InvCommand.getCommand(), "inv", "openinv");
         game.getCommandManager().register(this, KickCommand.getCommand(), "kick");
         game.getCommandManager().register(this, ListCommand.getCommand(), "list");
         game.getCommandManager().register(this, MessageCommand.getCommand(), "message", "m", "msg");

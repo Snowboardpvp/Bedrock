@@ -24,6 +24,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/heal (player)` - Heal a player or yourself.
 - `/home (name)` - Teleport to a home.
 - `/homes` - List your homes.
+- `/inv (player)` - Open player inventories.
 - `/fly (player)` - Toggle fly for yourself or others.
 - `/kick (player) [reason]` - Kick a player.
 - `/list` - List all online players.
@@ -63,10 +64,12 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `bedrock.delhome` - Delete a warp.
 - `bedrock.feed.use` - Feed self.
 - `bedrock.feed.others` - Feed others.
+- `bedrock.god` - Toggle invincibility.
 - `bedrock.heal.use` - Heal self.
 - `bedrock.heal.others` - Heal others.
 - `bedrock.home` - Use homes. Limits are define in permissions options.
-- `bedrock.god` - Toggle invincibility.
+- `bedrock.inv.use` - Open other player's inventories.
+- `bedrock.inv.exempt` - Exempt player from having inv opened.
 - `bedrock.fly.use` - Toggle fly for yourself.
 - `bedrock.fly.others` - Toggle fly for others.
 - `bedrock.kick` - Kick players.
