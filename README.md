@@ -20,6 +20,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/delhome (name)` - Delete a home.
 - `/delwarp (name)` - Delete a warp.
 - `/feed (player)` - Feed a player or yourself.
+- `/god` - Toggle invincibility.
 - `/heal (player)` - Heal a player or yourself.
 - `/home (name)` - Teleport to a home.
 - `/homes` - List your homes.
@@ -64,6 +65,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `bedrock.heal.use` - Heal self.
 - `bedrock.heal.others` - Heal others.
 - `bedrock.home` - Use homes. Limits are define in permissions options.
+- `bedrock.god` - Toggle invincibility.
 - `bedrock.fly.use` - Toggle fly for yourself.
 - `bedrock.fly.others` - Toggle fly for others.
 - `bedrock.kick` - Kick players.

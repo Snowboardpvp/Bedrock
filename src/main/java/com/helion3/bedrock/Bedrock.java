@@ -25,6 +25,9 @@ package com.helion3.bedrock;
 
 import com.google.inject.Inject;
 import com.helion3.bedrock.commands.*;
+import com.helion3.bedrock.data.invincibility.ImmutableInvincibilityData;
+import com.helion3.bedrock.data.invincibility.InvincibilityData;
+import com.helion3.bedrock.data.invincibility.InvincibilityDataManipulatorBuilder;
 import com.helion3.bedrock.listeners.*;
 import com.helion3.bedrock.managers.AFKManager;
 import com.helion3.bedrock.managers.MessageManager;
@@ -35,9 +38,11 @@ import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.io.File;
@@ -64,6 +69,11 @@ public class Bedrock {
     private ConfigurationLoader<CommentedConfigurationNode> configManager;
 
     @Listener
+    public void onPreInit(GamePreInitializationEvent event) {
+        Sponge.getDataManager().register(InvincibilityData.class, ImmutableInvincibilityData.class, new InvincibilityDataManipulatorBuilder());
+    }
+
+    @Listener
     public void onServerInit(GameInitializationEvent event) {
         plugin = this;
         parentDirectory = defaultConfig.getParentFile();
@@ -80,6 +90,7 @@ public class Bedrock {
         game.getCommandManager().register(this, DeleteWarpCommand.getCommand(), "delwarp");
         game.getCommandManager().register(this, FeedCommand.getCommand(), "feed");
         game.getCommandManager().register(this, FlyCommand.getCommand(), "fly");
+        game.getCommandManager().register(this, GodCommand.getCommand(), "god");
         game.getCommandManager().register(this, HealCommand.getCommand(), "heal");
         game.getCommandManager().register(this, HomeCommand.getCommand(), "home");
         game.getCommandManager().register(this, HomesCommand.getCommand(), "homes");
@@ -111,6 +122,7 @@ public class Bedrock {
         game.getCommandManager().register(this, WeatherCommand.getCommand(), "weather");
 
         // Event Listeners
+        game.getEventManager().registerListeners(this, new DamageEntityListener());
         game.getEventManager().registerListeners(this, new DeathListener());
         game.getEventManager().registerListeners(this, new DisconnectListener());
         game.getEventManager().registerListeners(this, new FishingListener());
