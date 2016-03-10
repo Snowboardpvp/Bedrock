@@ -51,6 +51,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/weather (sun|sunny|clear|nice|rain|storm|thunder|thunderstorm)` - Set the weather.
 - `/warp` - Teleport to a named location.
 - `/warps` - List warps.
+- `/whois (player)` - View whois information for a player.
 - `/world difficulty` - Set difficulty for current world.
 
 # Permissions
@@ -86,6 +87,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `bedrock.vanish` - Become invisible.
 - `bedrock.warp` - Teleport to a named location.
 - `bedrock.weather` - Change the weather.
+- `bedrock.whois` - View whois information for a player.
 - `bedrock.world.difficulty` - Set difficulty for current world.
 
 ## IRC

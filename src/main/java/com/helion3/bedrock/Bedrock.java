@@ -120,6 +120,7 @@ public class Bedrock {
         game.getCommandManager().register(this, WarpsCommand.getCommand(), "warps");
         game.getCommandManager().register(this, WorldCommand.getCommand(), "world");
         game.getCommandManager().register(this, WeatherCommand.getCommand(), "weather");
+        game.getCommandManager().register(this, WhoisCommand.getCommand(), "whois", "who");
 
         // Event Listeners
         game.getEventManager().registerListeners(this, new DamageEntityListener());

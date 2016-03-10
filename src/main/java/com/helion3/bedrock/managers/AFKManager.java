@@ -67,6 +67,16 @@ public class AFKManager {
     }
 
     /**
+     * Check if player is currently AFK.
+     *
+     * @param player Player
+     * @return boolean Is AFK
+     */
+    public boolean isAFK(Player player) {
+        return afkPlayers.containsKey(player);
+    }
+
+    /**
      * Update the timestamp of the last activity for a player.
      *
      * @param player

@@ -52,6 +52,16 @@ public class Format {
     }
 
     /**
+     * Returns Yes/No text based on a boolean.
+     * @param flag boolean Boolean to generate content from.
+     * @return Text Formatted content.
+     */
+    public static Text bool(boolean flag) {
+        checkNotNull(flag);
+        return (flag ? Text.of(TextColors.GREEN, "Yes") : Text.of(TextColors.RED, "No"));
+    }
+
+    /**
      * Returns content formatted as an error message
      * @param objects Object[] Content to format
      * @return Text Formatted content.
