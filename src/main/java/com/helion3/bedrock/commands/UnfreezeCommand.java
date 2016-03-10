@@ -23,20 +23,29 @@
  */
 package com.helion3.bedrock.commands;
 
+import com.helion3.bedrock.Bedrock;
+import com.helion3.bedrock.util.Format;
 import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
-public class PingCommand {
-    private PingCommand() {}
+public class UnfreezeCommand {
+    private UnfreezeCommand() {}
 
     public static CommandSpec getCommand() {
         return CommandSpec.builder()
-                .description(Text.of("Verify the server is responsive."))
-                .executor((source, args) -> {
-                    source.sendMessage(Text.of("Pong!"));
+        .description(Text.of("Unfreeze/thaw a player."))
+        .arguments(
+            GenericArguments.player(Text.of("player"))
+        )
+        .permission("bedrock.freeze.use")
+        .executor((source, args) -> {
+            Bedrock.getJailManager().thaw(args.<Player>getOne("player").get());
+            source.sendMessage(Format.success("Player unfrozen."));
 
-                    return CommandResult.success();
-                }).build();
+            return CommandResult.success();
+        }).build();
     }
 }

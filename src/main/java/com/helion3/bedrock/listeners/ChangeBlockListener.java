@@ -21,22 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.helion3.bedrock.commands;
+package com.helion3.bedrock.listeners;
 
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.spec.CommandSpec;
-import org.spongepowered.api.text.Text;
+import com.helion3.bedrock.Bedrock;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.block.ChangeBlockEvent;
+import org.spongepowered.api.event.filter.cause.First;
 
-public class PingCommand {
-    private PingCommand() {}
-
-    public static CommandSpec getCommand() {
-        return CommandSpec.builder()
-                .description(Text.of("Verify the server is responsive."))
-                .executor((source, args) -> {
-                    source.sendMessage(Text.of("Pong!"));
-
-                    return CommandResult.success();
-                }).build();
+public class ChangeBlockListener {
+    @Listener
+    public void onBlockChange(final ChangeBlockEvent event, @First Player player) {
+        if (Bedrock.getJailManager().isFrozen(player)) {
+            event.setCancelled(true);
+        }
     }
 }

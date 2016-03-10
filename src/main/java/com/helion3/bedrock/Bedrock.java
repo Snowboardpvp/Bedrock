@@ -30,6 +30,7 @@ import com.helion3.bedrock.data.invincibility.InvincibilityData;
 import com.helion3.bedrock.data.invincibility.InvincibilityDataManipulatorBuilder;
 import com.helion3.bedrock.listeners.*;
 import com.helion3.bedrock.managers.AFKManager;
+import com.helion3.bedrock.managers.JailManager;
 import com.helion3.bedrock.managers.MessageManager;
 import com.helion3.bedrock.managers.PlayerConfigManager;
 import com.helion3.bedrock.managers.TeleportManager;
@@ -52,6 +53,7 @@ public class Bedrock {
     private static AFKManager afkManager;
     private static Configuration config;
     private static Game game;
+    private static final JailManager jailManager = new JailManager();
     private static Logger logger;
     private static final MessageManager messageManager = new MessageManager();
     private static File parentDirectory;
@@ -89,6 +91,7 @@ public class Bedrock {
         game.getCommandManager().register(this, DeleteHomeCommand.getCommand(), "delhome");
         game.getCommandManager().register(this, DeleteWarpCommand.getCommand(), "delwarp");
         game.getCommandManager().register(this, FeedCommand.getCommand(), "feed");
+        game.getCommandManager().register(this, FreezeCommand.getCommand(), "freeze");
         game.getCommandManager().register(this, FlyCommand.getCommand(), "fly");
         game.getCommandManager().register(this, GodCommand.getCommand(), "god");
         game.getCommandManager().register(this, HealCommand.getCommand(), "heal");
@@ -116,6 +119,7 @@ public class Bedrock {
         game.getCommandManager().register(this, TeleportRequestCommand.getCommand(), "tpa");
         game.getCommandManager().register(this, TeleportWorldCommand.getCommand(), "tpworld");
         game.getCommandManager().register(this, TimeCommand.getCommand(), "time");
+        game.getCommandManager().register(this, UnfreezeCommand.getCommand(), "unfreeze", "thaw");
         game.getCommandManager().register(this, VanishCommand.getCommand(), "vanish", "v");
         game.getCommandManager().register(this, WarpCommand.getCommand(), "warp", "w");
         game.getCommandManager().register(this, WarpsCommand.getCommand(), "warps");
@@ -124,6 +128,7 @@ public class Bedrock {
         game.getCommandManager().register(this, WhoisCommand.getCommand(), "whois", "who");
 
         // Event Listeners
+        game.getEventManager().registerListeners(this, new ChangeBlockListener());
         game.getEventManager().registerListeners(this, new DamageEntityListener());
         game.getEventManager().registerListeners(this, new DeathListener());
         game.getEventManager().registerListeners(this, new DisconnectListener());
@@ -165,6 +170,15 @@ public class Bedrock {
     @Inject
     public void setGame(Game injectGame) {
         game = injectGame;
+    }
+
+    /**
+     * Get the jail manager.
+     *
+     * @return JailManager
+     */
+    public static JailManager getJailManager() {
+        return jailManager;
     }
 
     /**

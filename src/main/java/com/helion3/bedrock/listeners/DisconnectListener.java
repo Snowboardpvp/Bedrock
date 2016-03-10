@@ -30,13 +30,16 @@ import org.spongepowered.api.event.network.ClientConnectionEvent;
 public class DisconnectListener {
     @Listener
     public void onPlayerQuit(final ClientConnectionEvent.Disconnect event) {
-        // Messaging
-        Bedrock.getMessageManager().clear(event.getTargetEntity());
-
         // AFK
         Bedrock.getAFKManager().clear(event.getTargetEntity());
 
         // Config
         Bedrock.getPlayerConfigManager().unload(event.getTargetEntity());
+
+        // Jail
+        Bedrock.getJailManager().clear(event.getTargetEntity());
+
+        // Messaging
+        Bedrock.getMessageManager().clear(event.getTargetEntity());
     }
 }

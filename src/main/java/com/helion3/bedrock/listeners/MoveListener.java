@@ -34,6 +34,10 @@ public class MoveListener {
     public void onPlayerMove(DisplaceEntityEvent.Move event) {
         if (event.getTargetEntity() instanceof Player) {
             Bedrock.getAFKManager().lastActivity((Player) event.getTargetEntity());
+
+            if (Bedrock.getJailManager().isFrozen((Player) event.getTargetEntity())) {
+                event.setCancelled(true);
+            }
         }
     }
 }

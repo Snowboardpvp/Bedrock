@@ -20,12 +20,13 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/delhome (name)` - Delete a home.
 - `/delwarp (name)` - Delete a warp.
 - `/feed (player)` - Feed a player or yourself.
+- `/freeze (player` - Freeze a player where they are. A mobile jail.
+- `/fly (player)` - Toggle fly for yourself or others.
 - `/god` - Toggle invincibility.
 - `/heal (player)` - Heal a player or yourself.
 - `/home (name)` - Teleport to a home.
 - `/homes` - List your homes.
 - `/inv (player)` - Open player inventories.
-- `/fly (player)` - Toggle fly for yourself or others.
 - `/kick (player) [reason]` - Kick a player.
 - `/list` - List all online players.
 - `/(m|message) (player) (message)` - Direct message another player.
@@ -64,14 +65,16 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `bedrock.delhome` - Delete a warp.
 - `bedrock.feed.use` - Feed self.
 - `bedrock.feed.others` - Feed others.
+- `bedrock.fly.use` - Toggle fly for yourself.
+- `bedrock.fly.others` - Toggle fly for others.
+- `bedrock.freeze.use` - Freeze players.
+- `bedrock.freeze.exempt` - Player who may not be frozen.
 - `bedrock.god` - Toggle invincibility.
 - `bedrock.heal.use` - Heal self.
 - `bedrock.heal.others` - Heal others.
 - `bedrock.home` - Use homes. Limits are define in permissions options.
 - `bedrock.inv.use` - Open other player's inventories.
 - `bedrock.inv.exempt` - Exempt player from having inv opened.
-- `bedrock.fly.use` - Toggle fly for yourself.
-- `bedrock.fly.others` - Toggle fly for others.
 - `bedrock.kick` - Kick players.
 - `bedrock.message` - Direct message players.
 - `bedrock.performance` - View performance stats.
