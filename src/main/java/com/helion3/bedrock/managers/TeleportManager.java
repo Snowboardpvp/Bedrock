@@ -33,7 +33,6 @@ import org.spongepowered.api.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class TeleportManager {
     private final Map<Player, Teleport> pendingRequests = new HashMap<>();
@@ -55,12 +54,12 @@ public class TeleportManager {
             this.recipient = recipient;
         }
 
-        public Optional<Player> getRecipient() {
-            return Optional.ofNullable(recipient);
+        public Player getRecipient() {
+            return recipient;
         }
 
-        public Optional<Player> getSender() {
-            return Optional.ofNullable(sender);
+        public Player getSender() {
+            return sender;
         }
 
         public Player getSource() {
@@ -78,19 +77,19 @@ public class TeleportManager {
      * @param teleport Teleport
      */
     public void request(Teleport teleport) {
-        Player sender = teleport.getSender().get();
-        Player recipient = teleport.getRecipient().get();
+        Player sender = teleport.getSender();
+        Player recipient = teleport.getRecipient();
 
         // Store
-        pendingRequests.put(teleport.getTarget(), teleport);
+        pendingRequests.put(recipient, teleport);
 
         recipient.sendMessage(Text.of(TextColors.YELLOW,
-            String.format("%s is requesting to teleport to you\n", sender.getName()),
-            TextColors.WHITE, "Use /tpaccept or /tpdeny within 20 seconds"));
+            String.format("%s is requesting to teleport %s\n", sender.getName(), (sender.equals(teleport.getSource()) ? "to you" : "you to them")),
+            TextColors.WHITE, "Use /tpaccept or /tpdeny within 30 seconds"));
 
         // Handle request
         sender.sendMessage(Format.subdued("Sending request..."));
-        Bedrock.getGame().getScheduler().createTaskBuilder().delayTicks(400L).execute(() -> {
+        Bedrock.getGame().getScheduler().createTaskBuilder().delayTicks(600L).execute(() -> {
             if (pendingRequests.remove(teleport.getTarget()) != null) {
                 sender.sendMessage(Format.subdued("Your request did not receive a response."));
             }
@@ -107,13 +106,13 @@ public class TeleportManager {
             player.sendMessage(Format.error("You do not have any pending requests."));
         } else {
             Teleport teleport = pendingRequests.get(player);
-            Player sender = teleport.getSender().get();
-            Player recipient = teleport.getRecipient().get();
+            Player source = teleport.getSource();
+            Player target = teleport.getTarget();
 
-            sender.sendMessage(Format.success(String.format("Teleporting %s....", teleport.getSource().getName())));
-            recipient.sendMessage(Format.message(String.format("Teleporting you to %s", teleport.getTarget().getName())));
+            target.sendMessage(Format.success(String.format("Teleporting %s....", teleport.getSource().getName())));
+            source.sendMessage(Format.message(String.format("Teleporting you to %s", teleport.getTarget().getName())));
 
-            teleport(sender, player);
+            teleport(source, target);
             pendingRequests.remove(player);
         }
     }
@@ -128,7 +127,7 @@ public class TeleportManager {
             player.sendMessage(Format.error("You do not have any pending requests."));
         } else {
             Teleport teleport = pendingRequests.get(player);
-            Player sender = teleport.getSender().get();
+            Player sender = teleport.getSender();
 
             sender.sendMessage(Format.message("Sorry, your request was denied."));
             player.sendMessage(Format.success(String.format("Denied %s's tp request.", sender.getName())));
