@@ -51,6 +51,12 @@ public class WarpCommand {
                 return CommandResult.empty();
             }
 
+            Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                source.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             String name = args.<String>getOne("name").get();
             Optional<Location<World>> location = Bedrock.getWarpManager().getWarp(name);
 
@@ -59,7 +65,7 @@ public class WarpCommand {
                 return CommandResult.empty();
             }
 
-            ((Player) source).setLocation(location.get());
+            player.setLocation(location.get());
             source.sendMessage(Format.heading(String.format("Teleporting to %s.", name)));
 
             return CommandResult.success();

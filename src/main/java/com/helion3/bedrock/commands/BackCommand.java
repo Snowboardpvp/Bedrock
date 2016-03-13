@@ -50,6 +50,11 @@ public class BackCommand {
             }
 
             Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                source.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             PlayerConfiguration config = Bedrock.getPlayerConfigManager().getPlayerConfig(player);
 
             Optional<Location<World>> death = ConfigurationUtil.getNamedLocation(config.getNode("deaths"), "last");

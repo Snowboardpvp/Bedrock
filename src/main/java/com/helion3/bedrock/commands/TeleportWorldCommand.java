@@ -49,10 +49,16 @@ public class TeleportWorldCommand {
                 return CommandResult.empty();
             }
 
+            Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                player.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             WorldProperties properties = args.<WorldProperties>getOne("world").get();
             World world = Bedrock.getGame().getServer().getWorld(properties.getUniqueId()).get();
 
-            Bedrock.getTeleportManager().teleport((Player) source, world);
+            Bedrock.getTeleportManager().teleport(player, world);
 
             return CommandResult.success();
         }).build();

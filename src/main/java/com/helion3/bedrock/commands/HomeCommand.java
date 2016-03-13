@@ -54,6 +54,11 @@ public class HomeCommand {
             }
 
             Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                source.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             String name = args.<String>getOne("name").get();
 
             // Grab home from config

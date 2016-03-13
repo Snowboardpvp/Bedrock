@@ -48,8 +48,14 @@ public class TeleportRequestCommand {
                 return CommandResult.empty();
             }
 
+            Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                player.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             // Request...
-            Teleport teleport = new Teleport((Player) source, args.<Player>getOne("player").get());
+            Teleport teleport = new Teleport(player, args.<Player>getOne("player").get());
             Bedrock.getTeleportManager().request(teleport);
 
             return CommandResult.success();

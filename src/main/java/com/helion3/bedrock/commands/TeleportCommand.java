@@ -60,6 +60,12 @@ public class TeleportCommand {
                 sourceOrTarget = (Player) source;
             }
 
+            Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(sourceOrTarget)) {
+                source.sendMessage(Format.error("Player is frozen and may not travel."));
+                return CommandResult.empty();
+            }
+
             Bedrock.getTeleportManager().teleport(sourceOrTarget, target);
 
             return CommandResult.success();

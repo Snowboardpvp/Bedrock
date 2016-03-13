@@ -48,9 +48,13 @@ public class TeleportPositionCommand {
                 return CommandResult.empty();
             }
 
-            Vector3d position = args.<Vector3d>getOne("location").get();
+            Player player = (Player) source;
+            if (Bedrock.getJailManager().isFrozen(player)) {
+                player.sendMessage(Format.error("You're frozen and may not travel."));
+                return CommandResult.empty();
+            }
 
-            Bedrock.getTeleportManager().teleport((Player) source, position);
+            Bedrock.getTeleportManager().teleport(player, args.<Vector3d>getOne("location").get());
 
             return CommandResult.success();
         }).build();
