@@ -99,6 +99,9 @@ public class MessageManager {
 
         // Store sender for easy reply
         setLastSender(sender, recipient);
+
+        // Store recipient for easy /r to the same person
+        setLastSender(recipient, sender);
     }
 
     /**
