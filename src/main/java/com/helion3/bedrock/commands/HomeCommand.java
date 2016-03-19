@@ -25,6 +25,7 @@ package com.helion3.bedrock.commands;
 
 import com.helion3.bedrock.Bedrock;
 import com.helion3.bedrock.PlayerConfiguration;
+import com.helion3.bedrock.util.ConfigurationUtil;
 import com.helion3.bedrock.util.Format;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.spongepowered.api.command.CommandResult;
@@ -32,6 +33,7 @@ import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import java.util.Optional;
@@ -69,20 +71,14 @@ public class HomeCommand {
                 return CommandResult.empty();
             }
 
-            // Build location
-            double x = node.getNode("x").getDouble();
-            double y = node.getNode("y").getDouble();
-            double z = node.getNode("z").getDouble();
-            UUID worldUuid = UUID.fromString(node.getNode("worldUuid").getString());
-
-            Optional<World> world = Bedrock.getGame().getServer().getWorld(worldUuid);
-            if (!world.isPresent()) {
-                source.sendMessage(Format.error("Home is in a world that no longer exists."));
+            Optional<Location<World>> location = ConfigurationUtil.getNamedLocation(config.getNode("homes"), name);
+            if (!location.isPresent()) {
+                source.sendMessage(Format.error("Home location is no longer valid."));
                 return CommandResult.empty();
             }
 
             // Teleport!
-            player.setLocation(world.get().getLocation(x, y, z));
+            player.setLocation(location.get());
 
             // Message
             player.sendMessage(Format.success(String.format("Teleporting you to home \"%s\"", name)));
