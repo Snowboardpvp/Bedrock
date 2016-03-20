@@ -82,8 +82,12 @@ public class AFKManager {
      * @param player
      */
     public void lastActivity(Player player) {
-        setAfk(player, false);
+        // Chat is async and could theoretically arrive after the player has left
+        if (!Bedrock.getGame().getServer().getOnlinePlayers().contains(player)) {
+            return;
+        }
 
+        setAfk(player, false);
         lastActivity.put(player, now());
     }
 
