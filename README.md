@@ -28,6 +28,7 @@ Drop into your `mods` folder, set any permissions, and enjoy.
 - `/homes` - List your homes.
 - `/inv (player)` - Open player inventories.
 - `/kick (player) [reason]` - Kick a player.
+- `/kickall [reason]` - Kick all players.
 - `/list` - List all online players.
 - `/(m|message) (player) (message)` - Direct message another player.
 - `/(perf|performance|gc)` - View performance stats.
