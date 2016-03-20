@@ -35,6 +35,7 @@ import org.spongepowered.api.text.format.TextStyles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,9 +50,11 @@ public class MessageManager {
     public void clear(Player player) {
         lastSenders.remove(player);
 
-        for (Map.Entry<Player, Player> entry : lastSenders.entrySet()) {
+        Iterator<Map.Entry<Player, Player>> iterator = lastSenders.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Player, Player> entry = iterator.next();
             if (entry.getValue().equals(player)) {
-                lastSenders.remove(entry.getKey());
+                iterator.remove();
             }
         }
     }
