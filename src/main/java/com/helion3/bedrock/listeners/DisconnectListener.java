@@ -30,6 +30,11 @@ import org.spongepowered.api.event.network.ClientConnectionEvent;
 public class DisconnectListener {
     @Listener
     public void onPlayerQuit(final ClientConnectionEvent.Disconnect event) {
+        // Skip if Player isn't online. Banned, non-whitelisted, etc players trigger Disconnect too
+        if (!Bedrock.getGame().getServer().getOnlinePlayers().contains(event.getTargetEntity())) {
+            return;
+        }
+
         // AFK
         Bedrock.getAFKManager().clear(event.getTargetEntity());
 
