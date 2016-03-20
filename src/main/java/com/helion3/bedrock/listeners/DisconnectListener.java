@@ -32,6 +32,7 @@ public class DisconnectListener {
     public void onPlayerQuit(final ClientConnectionEvent.Disconnect event) {
         // Skip if Player isn't online. Banned, non-whitelisted, etc players trigger Disconnect too
         if (!Bedrock.getGame().getServer().getOnlinePlayers().contains(event.getTargetEntity())) {
+            event.setMessageCancelled(true);
             return;
         }
 
