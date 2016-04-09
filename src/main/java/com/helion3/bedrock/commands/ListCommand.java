@@ -42,10 +42,17 @@ public class ListCommand {
             .description(Text.of("List online players."))
             .executor((source, args) -> {
                 Collection<Player> players = Bedrock.getGame().getServer().getOnlinePlayers();
-
-                source.sendMessage(Format.heading("There are ",
-                    TextColors.AQUA, players.size(), TextColors.GOLD, " players online!"));
-
+                int playerAmount = players.size();
+                
+                if (playerAmount == 1){
+                    source.sendMessage(Format.heading("There is ",
+                        TextColors.AQUA, playerAmount, TextColors.GOLD, " player online!"));
+                }
+                else {
+                    source.sendMessage(Format.heading("There are ",
+                        TextColors.AQUA, playerAmount, TextColors.GOLD, " players online!"));
+                }
+                
                 ArrayList<String> names = new ArrayList<>();
                 for (Player player : players) {
                     names.add(player.getName());
