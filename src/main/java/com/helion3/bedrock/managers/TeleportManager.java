@@ -110,7 +110,7 @@ public class TeleportManager {
             Player target = teleport.getTarget();
 
             target.sendMessage(Format.success(String.format("Teleporting %s....", teleport.getSource().getName())));
-            source.sendMessage(Format.message(String.format("Teleporting you to %s", teleport.getTarget().getName())));
+            source.sendMessage(Format.success(String.format("Teleporting you to %s", teleport.getTarget().getName())));
 
             teleport(source, target);
             pendingRequests.remove(player);
@@ -145,9 +145,6 @@ public class TeleportManager {
     public void teleport(Player source, Player target) {
         // Teleport
         source.setLocation(target.getLocation());
-
-        // Message
-        source.sendMessage(Format.success(String.format("Teleporting you to %s", target.getName())));
     }
 
     /**
